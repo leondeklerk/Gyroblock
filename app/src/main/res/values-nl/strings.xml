@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gyroblock</string>
+    <string name="title_activity_settings">Instellingen</string>
+    <string name="start_button">Start</string>
+    <string name="high_score">Top score</string>
+    <string name="dialog_confirm">Sluiten</string>
+    <string name="game_info">In dit spel is het de bedoeling een zo hoog mogelijke score te behalen. Om dit te bereiken is het nodig om de hindernissen heen te manoeuvreren met de gyroscopische of touch besturing</string>
+    <string name="music_switch_text">Muziek uit / aan</string>
+    <string name="gyro_pref">Gyrobesturing uit / aan</string>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Gyroblock</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="start_button">Start</string>
+    <string name="high_score">Highscore</string>
+    <string name="dialog_confirm">Close</string>
+    <string name="game_info">In this game it is your purpose to get score as high as possible. To do this you need to manoeuvre arround the barriers with gyroscopic or touch controls.</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="music_switch_text">Music off / on</string>
+    <string name="gyro_pref">Gyrocontrol off / on</string>
+</resources>

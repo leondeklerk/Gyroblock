@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:color="http://schemas.android.com/apk/res-auto">
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="gyro_switch"
+        android:title="@string/gyro_pref" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="music_switch"
+        android:title="@string/music_switch_text" />
+</PreferenceScreen>
