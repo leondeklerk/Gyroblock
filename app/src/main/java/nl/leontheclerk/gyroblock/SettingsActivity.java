@@ -1,4 +1,4 @@
-package com.leondeklerk.gyroblock;
+package nl.leontheclerk.gyroblock;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

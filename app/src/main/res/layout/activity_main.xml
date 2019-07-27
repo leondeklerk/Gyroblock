@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#475562"
-    tools:context="com.leondeklerk.gyroblock.MainActivity">
+    tools:context="nl.leontheclerk.gyroblock.MainActivity">
 
     <Button
         android:id="@+id/button"

@@ -1,4 +1,4 @@
-package com.leondeklerk.gyroblock;
+package nl.leontheclerk.gyroblock;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.leondeklerk.gyroblock;
+package nl.leontheclerk.gyroblock;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
