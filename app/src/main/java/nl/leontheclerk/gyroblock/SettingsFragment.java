@@ -1,17 +1,13 @@
 package nl.leontheclerk.gyroblock;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 
-public class SettingsFragment extends PreferenceFragment {
-    static SharedPreferences preferences;
+import androidx.preference.PreferenceFragmentCompat;
+
+public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
-        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.preferences, rootKey);
     }
 }

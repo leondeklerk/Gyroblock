@@ -1,5 +1,6 @@
 package nl.leontheclerk.gyroblock;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -9,14 +10,13 @@ import android.view.SurfaceView;
 class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
 
-    private SceneManager manager;
+    private final SceneManager manager;
 
     public GamePanel(Context context){
         super(context);
         getHolder().addCallback(this);
-        Constants.CURRENT_CONTEXT = context;
         thread = new MainThread(getHolder(), this);
-        manager = new SceneManager();
+        manager = new SceneManager(context);
         setFocusable(true);
     }
 
@@ -46,6 +46,7 @@ class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
           }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event){
         manager.receiveTouch(event);

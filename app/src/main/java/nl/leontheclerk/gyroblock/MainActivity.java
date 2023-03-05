@@ -1,6 +1,5 @@
 package nl.leontheclerk.gyroblock;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,9 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intentSettings = new Intent(this, SettingsActivity.class));
         } else if(v == informationButton){
             alertBuilder = new AlertDialog.Builder(this, alertTheme);
-            alertBuilder.setMessage(getString(R.string.game_info)).setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener()  {
-                public void onClick(DialogInterface dialog, int id) {
-                }
+            alertBuilder.setMessage(getString(R.string.game_info)).setPositiveButton(R.string.dialog_confirm, (dialog, id) -> {
             });
             alertBuilder.show();
         }

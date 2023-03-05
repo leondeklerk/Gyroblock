@@ -1,21 +1,22 @@
 package nl.leontheclerk.gyroblock;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
 /**
- * Created by Leont on 05/03/2018.
+ * Created by Leon on 05/03/2018.
  */
 
 public class SceneManager {
-    private ArrayList<Scene> scenes = new ArrayList<>();
+    private final ArrayList<Scene> scenes = new ArrayList<>();
     public static int ACTIVE_SCENE;
 
-    public SceneManager(){
+    public SceneManager(Context context){
         ACTIVE_SCENE = 0;
-        scenes.add(new GameplayScene());
+        scenes.add(new GameplayScene(context));
     }
 
     public void receiveTouch(MotionEvent event){

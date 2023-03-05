@@ -6,8 +6,8 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 public class RectPlayer implements GameObject {
-    private Rect rectangle;
-    private int color;
+    private final Rect rectangle;
+    private final int color;
 
     public RectPlayer(Rect rectangle, int color){
         this.rectangle = rectangle;

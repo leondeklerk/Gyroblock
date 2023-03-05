@@ -1,5 +1,6 @@
 package nl.leontheclerk.gyroblock;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,7 +14,7 @@ public class GameplayScene implements Scene {
     static RectPlayer player;
     private Point playerPoint;
     private ObstacleManager obstacleManager;
-    private Rect r = new Rect();
+    private final Rect r = new Rect();
 
     private boolean movingPlayer = false;
     private boolean gameOver = false;
@@ -21,19 +22,21 @@ public class GameplayScene implements Scene {
 
     private OrientationData orientationData;
     private long frameTime;
-    private SharedPreferences preferences;
+    private final SharedPreferences preferences;
     private boolean switch_state;
+    private final Context context;
 
-    GameplayScene() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(Constants.CURRENT_CONTEXT);
+    GameplayScene(Context context) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
         player = new RectPlayer(new Rect(Constants.SCREEN_WIDTH / 10, Constants.SCREEN_WIDTH / 10, (Constants.SCREEN_WIDTH / 10) * 2, (Constants.SCREEN_WIDTH / 10) * 2), Color.rgb(211, 47, 47));
         playerPoint = new Point(Constants.SCREEN_WIDTH / 2, 3 * Constants.SCREEN_HEIGHT / 4);
         player.update(playerPoint);
+        this.context = context;
 
-        obstacleManager = new ObstacleManager(Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT / 4, Constants.SCREEN_HEIGHT / 14, Color.rgb(244, 67, 54));
+        obstacleManager = new ObstacleManager(Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT / 4, Constants.SCREEN_HEIGHT / 14, Color.rgb(244, 67, 54), context);
         switch_state = preferences.getBoolean("gyro_switch", true);
         if (switch_state) {
-            orientationData = new OrientationData();
+            orientationData = new OrientationData(context);
             orientationData.register();
         }
         frameTime = System.currentTimeMillis();
@@ -92,15 +95,10 @@ public class GameplayScene implements Scene {
 
         if (gameOver) {
             Paint paint = new Paint();
-            paint.setTextSize(Constants.SCREEN_WIDTH / 10);
+            paint.setTextSize(Constants.SCREEN_WIDTH / 10f);
             paint.setColor(Color.WHITE);
-            drawCenterText(canvas, paint, "Game Over");
+            drawCenterText(canvas, paint);
         }
-    }
-
-    @Override
-    public void terminate() {
-        SceneManager.ACTIVE_SCENE = 0;
     }
 
     @Override
@@ -115,9 +113,6 @@ public class GameplayScene implements Scene {
                 if (gameOver && System.currentTimeMillis() - gameOverTime >= 500) {
                     reset();
                     gameOver = false;
-//                    if(switch_state) {
-//                      orientationData.newGame();
-//                    }
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -134,18 +129,18 @@ public class GameplayScene implements Scene {
     private void reset() {
         playerPoint = new Point(Constants.SCREEN_WIDTH / 2, 3 * Constants.SCREEN_HEIGHT / 4);
         player.update(playerPoint);
-        obstacleManager = new ObstacleManager(Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT / 4, Constants.SCREEN_HEIGHT / 14, Color.rgb(244, 67, 54));
+        obstacleManager = new ObstacleManager(Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT / 4, Constants.SCREEN_HEIGHT / 14, Color.rgb(244, 67, 54), context);
         movingPlayer = false;
     }
 
-    private void drawCenterText(Canvas canvas, Paint paint, String text) {
+    private void drawCenterText(Canvas canvas, Paint paint) {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.getClipBounds(r);
         int cHeight = r.height();
         int cWidth = r.width();
-        paint.getTextBounds(text, 0, text.length(), r);
+        paint.getTextBounds("Game Over", 0, "Game Over".length(), r);
         float x = cWidth / 2f - r.width() / 2f - r.left;
         float y = cHeight / 2f + r.height() / 2f - r.bottom;
-        canvas.drawText(text, x, y, paint);
+        canvas.drawText("Game Over", x, y, paint);
     }
 }

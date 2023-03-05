@@ -7,14 +7,14 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 public class OrientationData implements SensorEventListener {
-    private SensorManager manager;
-    private Sensor accelerometer;
-    private Sensor magnometer;
+    private final SensorManager manager;
+    private final Sensor accelerometer;
+    private final Sensor magnetometer;
 
     private float[] accelOutput;
     private float[] magOutput;
 
-    private float[] orientation = new float[3];
+    private final float[] orientation = new float[3];
     public float[] getOrientation(){
         return orientation;
     }
@@ -24,23 +24,15 @@ public class OrientationData implements SensorEventListener {
         return startOrientation;
     }
 
-    public void newGame(){
-        startOrientation = null;
-    }
-
-    public OrientationData(){
-        manager = (SensorManager)Constants.CURRENT_CONTEXT.getSystemService(Context.SENSOR_SERVICE);
+    public OrientationData(Context context){
+        manager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
         accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        magnometer = manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        magnetometer = manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
     }
 
     public void register(){
         manager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
-        manager.registerListener(this, magnometer, SensorManager.SENSOR_DELAY_GAME);
-    }
-
-    public void pause(){
-        manager.unregisterListener(this);
+        manager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -54,8 +46,8 @@ public class OrientationData implements SensorEventListener {
         if(accelOutput != null && magOutput != null){
             float[] R = new float[9];
             float[] I = new float[0];
-            boolean succes = SensorManager.getRotationMatrix(R, I, accelOutput, magOutput);
-            if(succes){
+            boolean success = SensorManager.getRotationMatrix(R, I, accelOutput, magOutput);
+            if(success){
                 SensorManager.getOrientation(R, orientation);
                 if(startOrientation == null){
                     startOrientation = new float[orientation.length];
