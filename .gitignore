@@ -157,3 +157,9 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/windows,androidstudio
 .idea/**
+
+# Assets
+**/ic_launcher.png
+**/ic_launcher_foreground.png
+**/ic_launcher_round.png
+**/backgroundmusic.ogg
